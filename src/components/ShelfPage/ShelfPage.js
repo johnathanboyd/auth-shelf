@@ -1,3 +1,4 @@
+import { object } from 'prop-types';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux'
 
