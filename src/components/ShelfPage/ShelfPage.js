@@ -45,7 +45,7 @@ function ShelfPage() {
       <button onClick = {() => addItem()}>Add</button>
       <p>All of the available items can be seen here.</p>
       <ul>
-      { Array.isArray(items) ? items.map( item => {return<li>{item.description}<img src={item.image_url} width="200" height="300"/><button onClick = {() => deleteItem(item.user_id, item.id)}>Delete</button></li> }): '' }
+      { items.map( item => {return<li key={item.id}>{item.description}<img src={item.image_url}/></li> })}
       </ul>
     </div>
   );
