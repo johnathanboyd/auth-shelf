@@ -21,7 +21,15 @@ router.get('/', (req, res) => {
   })
 });
 
-
+router.get('/:id',(req, res) =>{
+  let queryString = `SELECT * FROM item WHERE id = $1`;
+  pool.query( queryString, [req.params.id]).then( (results)=>{
+    res.send( results.rows );
+  }).catch( ( err )=>{
+    console.log( err )
+    res.send(500);
+  })
+})
 
 /**
  * Add an item for the logged in user to the shelf
