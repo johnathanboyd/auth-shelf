@@ -12,7 +12,7 @@ const router = express.Router();
  */
 router.get('/', (req, res) => {
   console.log ('/shelf GET')
-  let queryString = `SELECT * FROM "item"`;
+  let queryString = `SELECT * FROM item`;
   pool.query( queryString ).then ( (results)=>{
     res.send( results.rows );
   }).catch( ( err )=>{

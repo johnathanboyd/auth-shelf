@@ -1,11 +1,17 @@
 import { object } from 'prop-types';
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import useReduxStore from '../../hooks/useReduxStore';
 
 
 function ShelfPage() {
+  useEffect( () => { getItems() }, [] );
+
   const store = useReduxStore();
+
+  const items = useSelector( store => {
+    return store.items;
+  })
 
   const [ objectToSend, setObjectToSend] = useState({});
 
@@ -27,6 +33,11 @@ function ShelfPage() {
     }
     
   }
+
+  const getItems = () => {
+    console.log( 'in getItems' );
+    dispatch( { type: 'FETCH_SHELF' } );
+  }
   return (
     <div className="container">
       <h2>Shelf</h2>
@@ -37,6 +48,7 @@ function ShelfPage() {
       <input onChange = {event => {setObjectToSend({ ...objectToSend, image_url: event.target.value})}}type="text"></input>
       <button onClick = {() => addItem()}>Add</button>
       <p>All of the available items can be seen here.</p>
+      {JSON.stringify(items)}
     </div>
   );
 }
