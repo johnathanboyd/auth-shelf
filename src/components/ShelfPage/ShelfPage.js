@@ -1,9 +1,13 @@
 import { object } from 'prop-types';
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux';
+import useReduxStore from '../../hooks/useReduxStore';
+
 
 function ShelfPage() {
-  const [ objectToSend, setObjectToSend] = useState({});
+  const store = useReduxStore();
+
+  const [ objectToSend, setObjectToSend] = useState({user_id: store.user.id});
 
   const dispatch = useDispatch();
 

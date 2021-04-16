@@ -1,5 +1,10 @@
 const express = require('express');
+const {
+  rejectUnauthenticated,
+} = require('../modules/authentication-middleware');
+const encryptLib = require('../modules/encryption');
 const pool = require('../modules/pool');
+const userStrategy = require('../strategies/user.strategy');
 const router = express.Router();
 
 /**
@@ -13,8 +18,8 @@ router.get('/', (req, res) => {
  * Add an item for the logged in user to the shelf
  */
 router.post('/', (req, res) => {
-  const queryText = `INSERT INTO item ("description", "image_url") VALUES ($1, $2)`;
-  pool.query( queryText, [ req.body.description, req.body.image_url ] )
+  const queryText = `INSERT INTO item ("description", "image_url", "user_id") VALUES ($1, $2, $3)`;
+  pool.query( queryText, [ req.body.description, req.body.image_url, req.body.user_id ] )
     .then( results => {
       res.sendStatus( 201 );
     }).catch( err => {
@@ -26,7 +31,7 @@ router.post('/', (req, res) => {
 /**
  * Delete an item if it's something the logged in user added
  */
-router.delete('/:id', (req, res) => {
+router.delete('/:id', rejectUnauthenticated, (req, res) => {
   // endpoint functionality
 });
 
