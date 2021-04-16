@@ -21,6 +21,7 @@ function ShelfPage() {
     console.log( 'in addItem' );
     if( objectToSend.description && objectToSend.image_url ) {
       dispatch( { type: 'ADD_ITEM', payload: objectToSend } );
+      getItems();
     } else {
       alert( 'You may not leave a field empty!');
     }
