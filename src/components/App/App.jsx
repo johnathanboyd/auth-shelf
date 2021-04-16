@@ -58,13 +58,13 @@ function App() {
             <UserPage />
           </ProtectedRoute>
 
-          <ProtectedRoute
+          <Route
             // logged in shows InfoPage else shows LoginPage
             exact
             path="/shelf"
           >
             <ShelfPage />
-          </ProtectedRoute>
+          </Route>
 
           {/* When a value is supplied for the authRedirect prop the user will
             be redirected to the path supplied when logged in, otherwise they will
