@@ -7,7 +7,7 @@ import useReduxStore from '../../hooks/useReduxStore';
 function ShelfPage() {
   const store = useReduxStore();
 
-  const [ objectToSend, setObjectToSend] = useState({user_id: store.user.id});
+  const [ objectToSend, setObjectToSend] = useState({});
 
   const dispatch = useDispatch();
 
@@ -18,6 +18,14 @@ function ShelfPage() {
     } else {
       alert( 'You may not leave a field empty!');
     }
+  }
+
+  const deleteItem = (userId, itemId) => {
+    console.log( 'in deleteItem' );
+    if ( store.user.id === userId ) {
+      dispatch( { type: 'DELETE_ITEM', payload: itemId})
+    }
+    
   }
   return (
     <div className="container">
