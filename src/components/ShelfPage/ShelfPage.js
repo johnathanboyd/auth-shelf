@@ -48,7 +48,9 @@ function ShelfPage() {
       <input onChange = {event => {setObjectToSend({ ...objectToSend, image_url: event.target.value})}}type="text"></input>
       <button onClick = {() => addItem()}>Add</button>
       <p>All of the available items can be seen here.</p>
-      {JSON.stringify(items)}
+      <ul>
+      { Array.isArray(items) ? items.map( item => {return<li>{item.description}<img src={item.image_url} width="200" height="300"/></li> }): '' }
+      </ul>
     </div>
   );
 }
