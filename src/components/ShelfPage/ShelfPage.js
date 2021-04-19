@@ -5,7 +5,7 @@ import useReduxStore from '../../hooks/useReduxStore';
 
 
 function ShelfPage() {
-  useEffect( () => { getItems() }, [] );
+  useEffect( () => { dispatch( { type: 'FETCH_SHELF' } ) }, [] );
 
   const store = useReduxStore();
 
@@ -27,16 +27,12 @@ function ShelfPage() {
   }
 
   const deleteItem = (userId, itemId) => {
-    console.log( 'in deleteItem' );
+    console.log( 'in deleteItem', userId, itemId, store.user.id );
     if ( store.user.id === userId ) {
       dispatch( { type: 'DELETE_ITEM', payload: itemId})
     }
-    
-  }
-
-  const getItems = () => {
-    console.log( 'in getItems' );
     dispatch( { type: 'FETCH_SHELF' } );
+    
   }
   return (
     <div className="container">
